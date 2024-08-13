@@ -943,6 +943,8 @@ def reinterpret(tensor, dtype):
         else:
             # Reinterpreting a wrapped tensor to a different type.
             return TensorWrapper(tensor.base, dtype)
+    elif isinstance(tensor, TensorVariable):
+            return TensorWrapper(tensor.val, dtype)
     elif hasattr(tensor, "data_ptr"):
         # A new wrapper is needed around an unwrapped tensor.
         return TensorWrapper(tensor, dtype)
